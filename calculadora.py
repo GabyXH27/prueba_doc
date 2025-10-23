@@ -6,18 +6,28 @@ def calculadora_basica():
     print("* : Multiplicación")
     print("/ : División")
     print("q : Salir")
-    
+
+    resultado = None  
+
     while True:
         try:
-            num1 = float(input("\nIngrese el primer número: "))
-            operador = input("Ingrese el operador (+, -, *, /): ")
-            
+            if resultado is None:
+                num1 = float(input("\nIngrese el primer número: "))
+            else:
+                print(f"\nResultado anterior: {resultado}")
+                usar_resultado = input("¿Desea usarlo como primer número? (s/n): ").lower()
+                if usar_resultado == 's':
+                    num1 = resultado
+                else:
+                    num1 = float(input("Ingrese el primer número: "))
+
+            operador = input("Ingrese el operador (+, -, *, / o q para salir): ")
             if operador.lower() == 'q':
                 print("¡Hasta luego!")
                 break
-                
+
             num2 = float(input("Ingrese el segundo número: "))
-            
+
             if operador == '+':
                 resultado = num1 + num2
             elif operador == '-':
@@ -32,9 +42,9 @@ def calculadora_basica():
             else:
                 print("Operador no válido")
                 continue
-            
+
             print(f"Resultado: {num1} {operador} {num2} = {resultado}")
-            
+
         except ValueError:
             print("Error: Por favor ingrese números válidos")
         except KeyboardInterrupt:
